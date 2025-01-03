@@ -8,4 +8,6 @@ class ErrorHandler(errorType: ErrorType) : RuntimeException(errorType.getMessage
         return ErrorResponse(this)
     }
 
+    fun getHttpCode(): Int = httpCode
+
 }
