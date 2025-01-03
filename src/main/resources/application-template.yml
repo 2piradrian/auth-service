@@ -1,0 +1,24 @@
+spring:
+
+  application:
+    name: auth-service
+
+  profiles:
+    default: default
+
+  datasource:
+    username: ${}
+    password: ${}
+    url: ${}
+    hikari:
+      maximum-pool-size: ${}
+      connection-timeout: ${}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${}
+
+server:
+  servlet:
+    context-path: /auth-server
+  port: 0
