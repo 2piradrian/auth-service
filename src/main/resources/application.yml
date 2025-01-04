@@ -1,3 +1,5 @@
+# Dev environment configuration
+
 spring:
 
   application:
@@ -7,23 +9,23 @@ spring:
     default: default
 
   datasource:
-    username:
-    password:
-    url:
+    username: admin
+    password: admin
+    url: jdbc:postgresql://localhost:5433/users-db
     hikari:
-      maximum-pool-size:
-      connection-timeout:
+      maximum-pool-size: 5
+      connection-timeout: 20000
 
   jpa:
     hibernate:
-      ddl-auto:
+      ddl-auto: "update"
 
 application:
   jwt:
-    secret:
+    secret: "I'll see you on the dark side of the moon"
     expiration: 86400000
 
 server:
   servlet:
     context-path: /auth-server
-  port: 0
+  port: 4444
