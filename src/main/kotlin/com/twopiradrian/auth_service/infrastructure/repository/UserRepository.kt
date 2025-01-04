@@ -57,11 +57,4 @@ class UserRepository(
         return UserEntityMapper.toDomain(updatedUserModel)
     }
 
-    override fun delete(id: String) {
-        val userModel: UserModel = this.userRepository.findById(id).orElse(null)
-
-        userModel.setStatus(Status.DELETED)
-        this.userRepository.save(userModel)
-    }
-
 }
