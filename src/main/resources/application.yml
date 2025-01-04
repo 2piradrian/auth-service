@@ -7,16 +7,21 @@ spring:
     default: default
 
   datasource:
-    username: ${spring.datasource.username}
-    password: ${spring.datasource.password}
-    url: ${spring.datasource.url}
+    username:
+    password:
+    url:
     hikari:
-      maximum-pool-size: ${spring.datasource.hikari.maximum-pool-size}
-      connection-timeout: ${spring.datasource.hikari.connection-timeout}
+      maximum-pool-size:
+      connection-timeout:
 
   jpa:
     hibernate:
-      ddl-auto: ${spring.jpa.hibernate.ddl-auto}
+      ddl-auto:
+
+application:
+  jwt:
+    secret:
+    expiration: 86400000
 
 server:
   servlet:

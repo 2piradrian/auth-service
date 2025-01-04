@@ -18,6 +18,11 @@ spring:
     hibernate:
       ddl-auto: ${}
 
+application:
+  jwt:
+    secret:
+    expiration: ${}
+
 server:
   servlet:
     context-path: /auth-server
