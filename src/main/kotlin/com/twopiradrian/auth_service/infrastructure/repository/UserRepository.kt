@@ -1,12 +1,26 @@
 package com.twopiradrian.auth_service.infrastructure.repository
 
+import com.twopiradrian.auth_service.data.sql.mapper.UserEntityMapper
+import com.twopiradrian.auth_service.data.sql.model.UserModel
+import com.twopiradrian.auth_service.domain.entity.Status
 import com.twopiradrian.auth_service.domain.entity.User
 import com.twopiradrian.auth_service.domain.repository.UserRepository
+import com.twopiradrian.auth_service.infrastructure.datasource.sql.PostgresUserRepository
+import org.springframework.stereotype.Repository
 
-class UserRepository : UserRepository {
+@Repository
+class UserRepository(
+    private val userRepository: PostgresUserRepository
+) : UserRepository {
 
     override fun findById(id: String): User? {
-        TODO("Not yet implemented")
+        val userModel: UserModel = this.userRepository.findById(id).orElse(null)
+
+        if (userModel.getStatus() == Status.INACTIVE || userModel.getStatus() == Status.DELETED) {
+            return null
+        }
+
+        return UserEntityMapper.toDomain(userModel)
     }
 
     override fun findByEmail(email: String): User? {
