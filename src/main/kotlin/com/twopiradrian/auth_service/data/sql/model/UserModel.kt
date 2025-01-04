@@ -58,4 +58,13 @@ class UserModel () {
     fun getCreatedAt(): LocalDateTime = createdAt
     fun getLastLogin(): LocalDateTime? = lastLogin
 
+    fun setId(id: String) = run { this.id = id }
+    fun setUsername(username: String) = run { this.username = username }
+    fun setEmail(email: String) = run { this.email = email }
+    fun setPassword(password: String) = run { this.password = password }
+    fun setRoles(roles: Set<Role>) = run { this.roles = roles }
+    fun setStatus(status: Status) = run { this.status = status }
+    fun setCreatedAt(createdAt: LocalDateTime) = run { this.createdAt = createdAt }
+    fun setLastLogin(lastLogin: LocalDateTime?) = run { this.lastLogin = lastLogin }
+
 }

@@ -24,23 +24,44 @@ class UserRepository(
     }
 
     override fun findByEmail(email: String): User? {
-        TODO("Not yet implemented")
+        val userModel: UserModel = this.userRepository.findByEmail(email).orElse(null)
+
+        if (userModel.getStatus() == Status.INACTIVE || userModel.getStatus() == Status.DELETED) {
+            return null
+        }
+
+        return UserEntityMapper.toDomain(userModel)
     }
 
     override fun findByUsername(username: String): User? {
-        TODO("Not yet implemented")
+        val userModel: UserModel = this.userRepository.findByUsername(username).orElse(null)
+
+        if (userModel.getStatus() == Status.INACTIVE || userModel.getStatus() == Status.DELETED) {
+            return null
+        }
+
+        return UserEntityMapper.toDomain(userModel)
     }
 
     override fun save(user: User): User {
-        TODO("Not yet implemented")
+        val userModel: UserModel = UserEntityMapper.toModel(user)
+        val savedUserModel: UserModel = this.userRepository.save(userModel)
+
+        return UserEntityMapper.toDomain(savedUserModel)
     }
 
     override fun update(user: User): User {
-        TODO("Not yet implemented")
+        val userModel: UserModel = UserEntityMapper.toModel(user)
+        val updatedUserModel: UserModel = this.userRepository.save(userModel)
+
+        return UserEntityMapper.toDomain(updatedUserModel)
     }
 
     override fun delete(id: String) {
-        TODO("Not yet implemented")
+        val userModel: UserModel = this.userRepository.findById(id).orElse(null)
+
+        userModel.setStatus(Status.DELETED)
+        this.userRepository.save(userModel)
     }
 
 }
