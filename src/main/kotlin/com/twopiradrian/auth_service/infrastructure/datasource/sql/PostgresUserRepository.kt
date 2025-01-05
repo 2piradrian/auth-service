@@ -9,4 +9,5 @@ interface PostgresUserRepository : JpaRepository<UserModel, String>  {
     fun findByEmail(email: String): Optional<UserModel>
 
     fun findByUsername(username: String): Optional<UserModel>
+
 }

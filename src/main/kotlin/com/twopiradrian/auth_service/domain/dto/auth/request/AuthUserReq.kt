@@ -1,4 +1,4 @@
-package com.twopiradrian.auth_service.domain.dto.user.request
+package com.twopiradrian.auth_service.domain.dto.auth.request
 
 import com.twopiradrian.auth_service.domain.error.ErrorHandler
 import com.twopiradrian.auth_service.domain.error.ErrorType

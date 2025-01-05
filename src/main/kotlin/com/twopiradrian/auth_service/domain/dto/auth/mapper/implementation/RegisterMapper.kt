@@ -1,7 +1,7 @@
-package com.twopiradrian.auth_service.domain.dto.user.mapper.implementation
+package com.twopiradrian.auth_service.domain.dto.auth.mapper.implementation
 
-import com.twopiradrian.auth_service.domain.dto.user.request.RegisterUserReq
-import com.twopiradrian.auth_service.domain.dto.user.response.RegisterUserRes
+import com.twopiradrian.auth_service.domain.dto.auth.request.RegisterUserReq
+import com.twopiradrian.auth_service.domain.dto.auth.response.RegisterUserRes
 import com.twopiradrian.auth_service.domain.entity.User
 
 object RegisterMapper {

@@ -1,21 +1,28 @@
-package com.twopiradrian.auth_service.domain.dto.user.request
+package com.twopiradrian.auth_service.domain.dto.auth.request
 
 import com.twopiradrian.auth_service.domain.error.ErrorHandler
 import com.twopiradrian.auth_service.domain.error.ErrorType
 import com.twopiradrian.auth_service.domain.validator.RegexValidators
 
-class LoginUserReq private constructor(
-    private val email: String,
-    private val password: String
+class RegisterUserReq private constructor(
+    val username: String,
+    val password: String,
+    val email: String
 ) {
     companion object {
         fun create(
-            email: String?,
-            password: String?
-        ): LoginUserReq {
+            username: String?,
+            password: String?,
+            email: String?
+        ): RegisterUserReq {
 
-            if (password.isNullOrEmpty() || email.isNullOrEmpty()) {
+            if (username.isNullOrEmpty() || password.isNullOrEmpty() || email.isNullOrEmpty()) {
                 throw ErrorHandler(ErrorType.MISSING_REQUIRED_FIELDS)
+            }
+
+            val usernameValidator: RegexValidators = RegexValidators.USERNAME
+            if (!username.matches(usernameValidator.getRegex().toRegex())) {
+                throw ErrorHandler(ErrorType.INVALID_USERNAME)
             }
 
             val passwordValidator: RegexValidators = RegexValidators.PASSWORD
@@ -28,7 +35,7 @@ class LoginUserReq private constructor(
                 throw ErrorHandler(ErrorType.INVALID_EMAIL)
             }
 
-            return LoginUserReq(email, password)
+            return RegisterUserReq(username, password, email)
         }
     }
 }
