@@ -23,11 +23,16 @@ class AuthHelper(
 
     fun validateToken(token: String, tokenType: TokenType): String? {
 
-        val tokenValue = token.takeIf { it.startsWith("Bearer ") }
-            ?.removePrefix("Bearer ")
+        var tokenValue: String = token
+        if (token.startsWith("Bearer ")) {
+            tokenValue = token.removePrefix("Bearer ")
+        }
 
-        return if (tokenValue != null && tokenHelper.validateToken(tokenValue, tokenType))
-            tokenValue else null
+        if (!this.tokenHelper.validateToken(tokenValue, tokenType)) {
+            return null
+        }
+
+        return tokenValue
     }
 
     fun getSubject(token: String, tokenType: TokenType): String =

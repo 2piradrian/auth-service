@@ -1,8 +1,6 @@
 package com.twopiradrian.auth_service.presentation.app.service
 
-import com.twopiradrian.auth_service.domain.dto.auth.request.AuthenticateUserReq
-import com.twopiradrian.auth_service.domain.dto.auth.request.LoginUserReq
-import com.twopiradrian.auth_service.domain.dto.auth.request.RegisterUserReq
+import com.twopiradrian.auth_service.domain.dto.auth.request.*
 import com.twopiradrian.auth_service.domain.dto.auth.response.AuthenticateUserRes
 import com.twopiradrian.auth_service.domain.dto.auth.response.LoginUserRes
 import com.twopiradrian.auth_service.domain.dto.auth.response.RegisterUserRes
@@ -15,6 +13,8 @@ interface AuthServiceI {
 
     fun register(dto: RegisterUserReq): RegisterUserRes
 
-    // refresh token
+    fun verifyEmail(dto: VerifyEmailReq)
+
+    fun resendVerifyEmail(dto: ResendEmailReq)
 
 }

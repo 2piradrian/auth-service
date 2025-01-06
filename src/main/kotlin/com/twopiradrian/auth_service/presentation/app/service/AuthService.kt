@@ -3,9 +3,7 @@ package com.twopiradrian.auth_service.presentation.app.service
 import com.twopiradrian.auth_service.config.helper.AuthHelper
 import com.twopiradrian.auth_service.config.helper.EmailHelper
 import com.twopiradrian.auth_service.domain.dto.auth.mapper.AuthMapper
-import com.twopiradrian.auth_service.domain.dto.auth.request.AuthenticateUserReq
-import com.twopiradrian.auth_service.domain.dto.auth.request.LoginUserReq
-import com.twopiradrian.auth_service.domain.dto.auth.request.RegisterUserReq
+import com.twopiradrian.auth_service.domain.dto.auth.request.*
 import com.twopiradrian.auth_service.domain.dto.auth.response.AuthenticateUserRes
 import com.twopiradrian.auth_service.domain.dto.auth.response.LoginUserRes
 import com.twopiradrian.auth_service.domain.dto.auth.response.RegisterUserRes
@@ -85,10 +83,44 @@ class AuthService(
         this.emailService.sendEmail(
             to = saved.getEmail(),
             subject = "Email Validation",
-            text = emailHelper.validateEmailHTML(token)
+            text = this.emailHelper.verifyEmailHTML(token)
         )
 
         return AuthMapper.register().toResponse(saved)
     }
+
+    override fun verifyEmail(dto: VerifyEmailReq) {
+        val token: String = this.authHelper.validateToken(dto.token, TokenType.EMAIL_VALIDATION)
+            ?: throw ErrorHandler(ErrorType.UNAUTHORIZED)
+
+        val subject: String = this.authHelper.getSubject(token, TokenType.EMAIL_VALIDATION)
+
+        val user: User = this.userRepository.findById(subject)
+            ?: throw ErrorHandler(ErrorType.USER_NOT_FOUND)
+
+        if (user.getStatus() == Status.ACTIVE) {
+            throw ErrorHandler(ErrorType.USER_ALREADY_ACTIVATED)
+        }
+
+        user.updateStatus(Status.ACTIVE)
+        this.userRepository.update(user)
+    }
+
+    override fun resendVerifyEmail(dto: ResendEmailReq) {
+        val user: User = this.userRepository.findByEmail(dto.email)
+            ?: throw ErrorHandler(ErrorType.USER_NOT_FOUND)
+
+        if (user.getStatus() == Status.ACTIVE) {
+            throw ErrorHandler(ErrorType.USER_ALREADY_ACTIVATED)
+        }
+
+        val token: String = this.authHelper.createToken(user, TokenType.EMAIL_VALIDATION)
+        this.emailService.sendEmail(
+            to = user.getEmail(),
+            subject = "Email Verification",
+            text = this.emailHelper.verifyEmailHTML(token)
+        )
+    }
+
 
 }

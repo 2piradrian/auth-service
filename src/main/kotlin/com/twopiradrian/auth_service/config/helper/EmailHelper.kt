@@ -8,13 +8,13 @@ class EmailHelper(
     private val environmentVars: EnvironmentVars
 ) {
 
-    fun validateEmailHTML(token: String): String {
-        val link = "${environmentVars.getUrl()}/api/auth/validate-email?token=$token"
+    fun verifyEmailHTML(token: String): String {
+        val link = "${environmentVars.getUrl()}/api/auth/verify-email/$token"
 
         return """
-            <h1>Validate your email</h1>
-            <p>Click the link below to validate your email</p>
-            <a href="$link">Validate email</a>
+            <h1>Verify your email</h1>
+            <p>Click the link below to verify your email</p>
+            <a href="$link">Verify email</a>
         """.trimIndent()
     }
 

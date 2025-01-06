@@ -19,6 +19,7 @@ enum class ErrorType(
 
     USERNAME_ALREADY_EXISTS("Username already exists", 400),
     EMAIL_ALREADY_EXISTS("Email already exists", 400),
+    USER_ALREADY_ACTIVATED("User already activated", 400),
 
     INTERNAL_ERROR("Internal error", 500),
     INVALID_FIELDS("Invalid fields", 400);
