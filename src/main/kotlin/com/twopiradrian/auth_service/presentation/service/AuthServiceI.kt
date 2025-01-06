@@ -9,7 +9,7 @@ import com.twopiradrian.auth_service.domain.dto.auth.response.RegisterUserRes
 
 interface AuthServiceI {
 
-    fun auth(dto: AuthUserReq): AuthUserRes
+    fun authenticate(dto: AuthUserReq): AuthUserRes
 
     fun login(dto: LoginUserReq): LoginUserRes
 

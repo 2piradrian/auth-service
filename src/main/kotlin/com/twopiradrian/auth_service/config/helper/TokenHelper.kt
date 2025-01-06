@@ -27,7 +27,7 @@ class TokenHelper(
     fun createToken(user: User): String {
         val now = Date()
         return Jwts.builder()
-            .setSubject(user.id)
+            .setSubject(user.getId())
             .setIssuedAt(now)
             .setExpiration(Date(now.time + expiration))
             .signWith(secretKey)

@@ -4,25 +4,27 @@ import com.twopiradrian.auth_service.domain.dto.auth.request.RegisterUserReq
 import com.twopiradrian.auth_service.domain.dto.auth.response.RegisterUserRes
 import com.twopiradrian.auth_service.domain.entity.User
 
-object RegisterMapper {
+class RegisterMapper {
 
-    fun toRequest(payload: Map<String?, Any?>): RegisterUserReq {
-        return RegisterUserReq.create(
-            payload["username"] as String?,
-            payload["password"] as String?,
-            payload["email"] as String?
-        )
-    }
+    companion object {
+        fun toRequest(payload: Map<String?, Any?>): RegisterUserReq {
+            return RegisterUserReq.create(
+                payload["username"] as String?,
+                payload["password"] as String?,
+                payload["email"] as String?
+            )
+        }
 
-    fun toResponse(user: User): RegisterUserRes {
-        return RegisterUserRes(
-            user.id,
-            user.username,
-            user.email,
-            user.roles,
-            user.createdAt,
-            user.lastLogin
-        )
+        fun toResponse(user: User): RegisterUserRes {
+            return RegisterUserRes(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getRoles(),
+                user.getCreatedAt(),
+                user.getLastLogin()
+            )
+        }
     }
 
 }

@@ -22,14 +22,14 @@ class UserEntityMapper {
 
         fun toModel(user: User): UserModel {
             return UserModel(
-                user.id,
-                user.username,
-                user.email,
-                user.password,
-                user.roles,
-                user.status,
-                user.createdAt,
-                user.lastLogin
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getRoles(),
+                user.getStatus(),
+                user.getCreatedAt(),
+                user.getLastLogin(),
             )
         }
 

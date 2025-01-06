@@ -4,19 +4,21 @@ import com.twopiradrian.auth_service.domain.dto.auth.request.LoginUserReq
 import com.twopiradrian.auth_service.domain.dto.auth.response.LoginUserRes
 import com.twopiradrian.auth_service.domain.entity.Token
 
-object LoginMapper {
+class LoginMapper {
 
-    fun toRequest(payload: Map<String?, Any?>): LoginUserReq {
-        return LoginUserReq.create(
-            payload["email"] as String?,
-            payload["password"] as String?
-        )
-    }
+    companion object {
+        fun toRequest(payload: Map<String?, Any?>): LoginUserReq {
+            return LoginUserReq.create(
+                payload["email"] as String?,
+                payload["password"] as String?
+            )
+        }
 
-    fun toResponse(token: Token?): LoginUserRes {
-        return LoginUserRes(
-            token
-        )
+        fun toResponse(token: Token?): LoginUserRes {
+            return LoginUserRes(
+                token
+            )
+        }
     }
 
 }

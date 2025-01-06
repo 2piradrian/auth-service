@@ -13,7 +13,7 @@ class AuthHelper(
     fun hashPassword(password: String): String = passwordEncoder.encode(password)
 
     fun validatePassword(user: User, password: String): Boolean =
-        passwordEncoder.matches(password, user.password)
+        passwordEncoder.matches(password, user.getPassword())
 
     fun createToken(user: User): Token = Token(tokenHelper.createToken(user))
 

@@ -5,8 +5,8 @@ import com.twopiradrian.auth_service.domain.error.ErrorType
 import com.twopiradrian.auth_service.domain.validator.RegexValidators
 
 class LoginUserReq private constructor(
-    private val email: String,
-    private val password: String
+    val email: String,
+    val password: String
 ) {
     companion object {
         fun create(

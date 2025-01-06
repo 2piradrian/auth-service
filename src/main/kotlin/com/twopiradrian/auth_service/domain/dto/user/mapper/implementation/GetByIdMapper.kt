@@ -4,21 +4,25 @@ import com.twopiradrian.auth_service.domain.dto.user.request.GetUserByIdReq
 import com.twopiradrian.auth_service.domain.dto.user.response.GetUserByIdRes
 import com.twopiradrian.auth_service.domain.entity.User
 
-object GetByIdMapper {
-    fun toRequest(userId: String?): GetUserByIdReq {
-        return GetUserByIdReq.create(
-            userId
-        )
+class GetByIdMapper {
+
+    companion object {
+        fun toRequest(userId: String?): GetUserByIdReq {
+            return GetUserByIdReq.create(
+                userId
+            )
+        }
+
+        fun toResponse(user: User): GetUserByIdRes {
+            return GetUserByIdRes(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getRoles(),
+                user.getCreatedAt(),
+                user.getLastLogin()
+            )
+        }
     }
 
-    fun toResponse(user: User): GetUserByIdRes {
-        return GetUserByIdRes(
-            user.id,
-            user.username,
-            user.email,
-            user.roles,
-            user.createdAt,
-            user.lastLogin
-        )
-    }
 }
