@@ -16,9 +16,9 @@ class AuthController(
 
     @GetMapping("/authenticate")
     fun authenticate(
-        @RequestHeader(value = "Authorization") token: String
+        @RequestHeader(value = "Authorization") token: String?
     ): ResponseEntity<Any> {
-        val dto: AuthenticateUserReq = AuthMapper().authenticate().toRequest(token)
+        val dto: AuthenticateUserReq = AuthMapper.authenticate().toRequest(token)
         return ResponseEntity.ok(authService.authenticate(dto))
     }
 
@@ -26,7 +26,7 @@ class AuthController(
     fun login(
         @RequestBody payload: Map<String?, Any?>
     ): ResponseEntity<Any> {
-        val dto: LoginUserReq = AuthMapper().login().toRequest(payload)
+        val dto: LoginUserReq = AuthMapper.login().toRequest(payload)
         return ResponseEntity.ok(authService.login(dto))
     }
 
@@ -34,7 +34,7 @@ class AuthController(
     fun register(
         @RequestBody payload: Map<String?, Any?>
     ): ResponseEntity<Any> {
-        val dto: RegisterUserReq = AuthMapper().register().toRequest(payload)
+        val dto: RegisterUserReq = AuthMapper.register().toRequest(payload)
         return ResponseEntity.ok(authService.register(dto))
     }
 
