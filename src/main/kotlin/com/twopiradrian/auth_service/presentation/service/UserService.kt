@@ -10,7 +10,11 @@ import com.twopiradrian.auth_service.domain.entity.User
 import com.twopiradrian.auth_service.domain.error.ErrorHandler
 import com.twopiradrian.auth_service.domain.error.ErrorType
 import com.twopiradrian.auth_service.infrastructure.repository.UserRepository
+import jakarta.transaction.Transactional
+import org.springframework.stereotype.Service
 
+@Service
+@Transactional
 class UserService(
     private val authHelper: AuthHelper,
     private val userRepository: UserRepository,

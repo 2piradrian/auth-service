@@ -3,8 +3,9 @@ package com.twopiradrian.auth_service.config.helper
 import com.twopiradrian.auth_service.domain.entity.Token
 import com.twopiradrian.auth_service.domain.entity.User
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.stereotype.Component
 
-
+@Component
 class AuthHelper(
     private val passwordEncoder: PasswordEncoder,
     private val tokenHelper: TokenHelper
