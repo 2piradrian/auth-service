@@ -1,13 +1,13 @@
 package com.twopiradrian.auth_service.config.helper
 
-import com.twopiradrian.auth_service.config.env.Environment
+import com.twopiradrian.auth_service.config.env.EnvironmentVars
 
 class EmailHelper(
-    private val environment: Environment
+    private val environmentVars: EnvironmentVars
 ) {
 
     fun validateEmailHTML(token: String): String {
-        val link = "${environment.getUrl()}/api/auth/validate-email?token=$token"
+        val link = "${environmentVars.getUrl()}/api/auth/validate-email?token=$token"
 
         return """
             <h1>Validate your email</h1>

@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets
 import javax.crypto.SecretKey
 
 @Component
-class Environment(
+class EnvironmentVars(
     @Value("\${application.jwt.secret.login}") private val secretLogin: String,
     @Value("\${application.jwt.secret.validation}") private val secretValidation: String,
     @Value("\${application.jwt.expiration}") private val expiration: Long,

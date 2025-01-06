@@ -26,10 +26,10 @@ class AuthService(
 ) : AuthServiceI {
 
     override fun authenticate(dto: AuthenticateUserReq): AuthenticateUserRes {
-        val token: String = this.authHelper.validateToken(dto.token, TokenType.LOGIN)
+        val token: String = this.authHelper.validateToken(dto.token, TokenType.AUTHENTICATION)
             ?: throw ErrorHandler(ErrorType.UNAUTHORIZED)
 
-        val subject: String = this.authHelper.getSubject(token, TokenType.LOGIN)
+        val subject: String = this.authHelper.getSubject(token, TokenType.AUTHENTICATION)
 
         val user: User = this.userRepository.findById(subject)
             ?: throw ErrorHandler(ErrorType.USER_NOT_FOUND)
@@ -53,7 +53,7 @@ class AuthService(
         this.userRepository.update(user)
 
         val token = Token(
-            accessToken = this.authHelper.createToken(user, TokenType.LOGIN)
+            accessToken = this.authHelper.createToken(user, TokenType.AUTHENTICATION)
         )
 
         return AuthMapper.login().toResponse(user, token)

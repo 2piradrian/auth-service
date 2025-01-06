@@ -6,6 +6,7 @@ import com.twopiradrian.auth_service.domain.dto.user.request.DeleteUserReq
 import com.twopiradrian.auth_service.domain.dto.user.request.GetUserByIdReq
 import com.twopiradrian.auth_service.domain.dto.user.response.GetUserByIdRes
 import com.twopiradrian.auth_service.domain.entity.Status
+import com.twopiradrian.auth_service.domain.entity.TokenType
 import com.twopiradrian.auth_service.domain.entity.User
 import com.twopiradrian.auth_service.domain.error.ErrorHandler
 import com.twopiradrian.auth_service.domain.error.ErrorType
@@ -28,10 +29,10 @@ class UserService(
     }
 
     override fun delete(dto: DeleteUserReq) {
-        val token: String = this.authHelper.validateToken(dto.token)
+        val token: String = this.authHelper.validateToken(dto.token, TokenType.AUTHENTICATION)
             ?: throw ErrorHandler(ErrorType.UNAUTHORIZED)
 
-        val subject: String = this.authHelper.getSubject(token)
+        val subject: String = this.authHelper.getSubject(token, TokenType.AUTHENTICATION)
 
         val user: User = this.userRepository.findById(subject)
             ?: throw ErrorHandler(ErrorType.USER_NOT_FOUND)
