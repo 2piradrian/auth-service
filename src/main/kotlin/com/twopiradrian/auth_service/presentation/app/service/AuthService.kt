@@ -1,6 +1,7 @@
 package com.twopiradrian.auth_service.presentation.app.service
 
 import com.twopiradrian.auth_service.config.helper.AuthHelper
+import com.twopiradrian.auth_service.config.helper.EmailHelper
 import com.twopiradrian.auth_service.domain.dto.auth.mapper.AuthMapper
 import com.twopiradrian.auth_service.domain.dto.auth.request.AuthenticateUserReq
 import com.twopiradrian.auth_service.domain.dto.auth.request.LoginUserReq
@@ -21,6 +22,7 @@ import java.time.LocalDateTime
 @Transactional
 class AuthService(
     private val authHelper: AuthHelper,
+    private val emailHelper: EmailHelper,
     private val emailService: EmailService,
     private val userRepository: UserRepository,
 ) : AuthServiceI {
@@ -80,7 +82,11 @@ class AuthService(
         val saved: User = this.userRepository.save(user)
 
         val token: String = this.authHelper.createToken(saved, TokenType.EMAIL_VALIDATION)
-
+        this.emailService.sendEmail(
+            to = saved.getEmail(),
+            subject = "Email Validation",
+            text = emailHelper.validateEmailHTML(token)
+        )
 
         return AuthMapper.register().toResponse(saved)
     }

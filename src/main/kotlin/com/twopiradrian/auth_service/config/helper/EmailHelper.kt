@@ -1,7 +1,9 @@
 package com.twopiradrian.auth_service.config.helper
 
 import com.twopiradrian.auth_service.config.env.EnvironmentVars
+import org.springframework.stereotype.Component
 
+@Component
 class EmailHelper(
     private val environmentVars: EnvironmentVars
 ) {
