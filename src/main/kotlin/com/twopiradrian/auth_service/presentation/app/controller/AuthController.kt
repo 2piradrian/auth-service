@@ -1,10 +1,10 @@
-package com.twopiradrian.auth_service.presentation.controller
+package com.twopiradrian.auth_service.presentation.app.controller
 
 import com.twopiradrian.auth_service.domain.dto.auth.mapper.AuthMapper
 import com.twopiradrian.auth_service.domain.dto.auth.request.AuthenticateUserReq
 import com.twopiradrian.auth_service.domain.dto.auth.request.LoginUserReq
 import com.twopiradrian.auth_service.domain.dto.auth.request.RegisterUserReq
-import com.twopiradrian.auth_service.presentation.service.AuthService
+import com.twopiradrian.auth_service.presentation.app.service.AuthService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 

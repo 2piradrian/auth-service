@@ -1,4 +1,4 @@
-package com.twopiradrian.auth_service.presentation.service
+package com.twopiradrian.auth_service.presentation.app.service
 
 import com.twopiradrian.auth_service.config.helper.AuthHelper
 import com.twopiradrian.auth_service.domain.dto.auth.mapper.AuthMapper
@@ -8,13 +8,11 @@ import com.twopiradrian.auth_service.domain.dto.auth.request.RegisterUserReq
 import com.twopiradrian.auth_service.domain.dto.auth.response.AuthenticateUserRes
 import com.twopiradrian.auth_service.domain.dto.auth.response.LoginUserRes
 import com.twopiradrian.auth_service.domain.dto.auth.response.RegisterUserRes
-import com.twopiradrian.auth_service.domain.entity.Role
-import com.twopiradrian.auth_service.domain.entity.Status
-import com.twopiradrian.auth_service.domain.entity.Token
-import com.twopiradrian.auth_service.domain.entity.User
+import com.twopiradrian.auth_service.domain.entity.*
 import com.twopiradrian.auth_service.domain.error.ErrorHandler
 import com.twopiradrian.auth_service.domain.error.ErrorType
 import com.twopiradrian.auth_service.domain.repository.UserRepository
+import com.twopiradrian.auth_service.presentation.service.EmailService
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -23,14 +21,15 @@ import java.time.LocalDateTime
 @Transactional
 class AuthService(
     private val authHelper: AuthHelper,
+    private val emailService: EmailService,
     private val userRepository: UserRepository,
 ) : AuthServiceI {
 
     override fun authenticate(dto: AuthenticateUserReq): AuthenticateUserRes {
-        val token: String = this.authHelper.validateToken(dto.token)
+        val token: String = this.authHelper.validateToken(dto.token, TokenType.LOGIN)
             ?: throw ErrorHandler(ErrorType.UNAUTHORIZED)
 
-        val subject: String = this.authHelper.getSubject(token)
+        val subject: String = this.authHelper.getSubject(token, TokenType.LOGIN)
 
         val user: User = this.userRepository.findById(subject)
             ?: throw ErrorHandler(ErrorType.USER_NOT_FOUND)
@@ -53,7 +52,9 @@ class AuthService(
         user.updateLastLogin()
         this.userRepository.update(user)
 
-        val token: Token = this.authHelper.createToken(user)
+        val token = Token(
+            accessToken = this.authHelper.createToken(user, TokenType.LOGIN)
+        )
 
         return AuthMapper.login().toResponse(user, token)
     }
@@ -77,6 +78,9 @@ class AuthService(
         )
 
         val saved: User = this.userRepository.save(user)
+
+        val token: String = this.authHelper.createToken(saved, TokenType.EMAIL_VALIDATION)
+
 
         return AuthMapper.register().toResponse(saved)
     }

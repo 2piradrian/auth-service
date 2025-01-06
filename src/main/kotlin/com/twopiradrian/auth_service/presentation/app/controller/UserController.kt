@@ -1,9 +1,9 @@
-package com.twopiradrian.auth_service.presentation.controller
+package com.twopiradrian.auth_service.presentation.app.controller
 
 import com.twopiradrian.auth_service.domain.dto.user.mapper.UserMapper
 import com.twopiradrian.auth_service.domain.dto.user.request.DeleteUserReq
 import com.twopiradrian.auth_service.domain.dto.user.request.GetUserByIdReq
-import com.twopiradrian.auth_service.presentation.service.UserService
+import com.twopiradrian.auth_service.presentation.app.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping

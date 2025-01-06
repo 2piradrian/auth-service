@@ -1,4 +1,4 @@
-package com.twopiradrian.auth_service.presentation.service
+package com.twopiradrian.auth_service.presentation.app.service
 
 import com.twopiradrian.auth_service.domain.dto.user.request.DeleteUserReq
 import com.twopiradrian.auth_service.domain.dto.user.request.GetUserByIdReq

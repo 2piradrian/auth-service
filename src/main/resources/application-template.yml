@@ -2,6 +2,8 @@ spring:
 
   application:
     name: auth-service
+    api:
+      url: ${}
 
   profiles:
     default: default
@@ -33,7 +35,9 @@ spring:
 application:
   jwt:
     secret:
-    expiration: ${}
+      login: "I'll see you on the dark side of the moon"
+      validation: "I can't think of anything to say except, laughing is nice"
+    expiration: 86400000
 
 server:
-  port: 0
+  port: 4444
