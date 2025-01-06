@@ -18,6 +18,18 @@ spring:
     hibernate:
       ddl-auto: ${}
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 application:
   jwt:
     secret:

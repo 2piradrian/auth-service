@@ -41,3 +41,5 @@ out/
 
 ###############################################################################
 user-main-db
+application.yml
+src/main/resources/application.yml

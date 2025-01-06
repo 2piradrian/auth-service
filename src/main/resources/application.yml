@@ -20,6 +20,18 @@ spring:
     hibernate:
       ddl-auto: "update"
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 application:
   jwt:
     secret: "I'll see you on the dark side of the moon"
