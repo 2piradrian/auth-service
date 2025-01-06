@@ -3,19 +3,19 @@ package com.twopiradrian.auth_service.domain.dto.auth.request
 import com.twopiradrian.auth_service.domain.error.ErrorHandler
 import com.twopiradrian.auth_service.domain.error.ErrorType
 
-class AuthUserReq private constructor(
+class AuthenticateUserReq private constructor(
     val token: String
 ) {
     companion object {
         fun create(
             token: String?
-        ): AuthUserReq {
+        ): AuthenticateUserReq {
 
             if (token.isNullOrEmpty()) {
                 throw ErrorHandler(ErrorType.MISSING_REQUIRED_FIELDS)
             }
 
-            return AuthUserReq(token)
+            return AuthenticateUserReq(token)
         }
     }
 }

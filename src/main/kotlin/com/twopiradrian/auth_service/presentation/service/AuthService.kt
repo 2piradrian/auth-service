@@ -2,10 +2,10 @@ package com.twopiradrian.auth_service.presentation.service
 
 import com.twopiradrian.auth_service.config.helper.AuthHelper
 import com.twopiradrian.auth_service.domain.dto.auth.mapper.AuthMapper
-import com.twopiradrian.auth_service.domain.dto.auth.request.AuthUserReq
+import com.twopiradrian.auth_service.domain.dto.auth.request.AuthenticateUserReq
 import com.twopiradrian.auth_service.domain.dto.auth.request.LoginUserReq
 import com.twopiradrian.auth_service.domain.dto.auth.request.RegisterUserReq
-import com.twopiradrian.auth_service.domain.dto.auth.response.AuthUserRes
+import com.twopiradrian.auth_service.domain.dto.auth.response.AuthenticateUserRes
 import com.twopiradrian.auth_service.domain.dto.auth.response.LoginUserRes
 import com.twopiradrian.auth_service.domain.dto.auth.response.RegisterUserRes
 import com.twopiradrian.auth_service.domain.entity.Role
@@ -26,7 +26,7 @@ class AuthService(
     private val userRepository: UserRepository,
 ) : AuthServiceI {
 
-    override fun authenticate(dto: AuthUserReq): AuthUserRes {
+    override fun authenticate(dto: AuthenticateUserReq): AuthenticateUserRes {
         val token: String = this.authHelper.validateToken(dto.token)
             ?: throw ErrorHandler(ErrorType.UNAUTHORIZED)
 
