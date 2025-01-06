@@ -17,12 +17,13 @@ class AuthHelper(
 
     fun createToken(user: User): Token = Token(tokenHelper.createToken(user))
 
-    fun validateToken(token: String?): String? {
-        val tokenValue = token?.takeIf { it.startsWith("Bearer ") }
+    fun validateToken(token: String): String? {
+        val tokenValue = token.takeIf { it.startsWith("Bearer ") }
             ?.removePrefix("Bearer ")
 
         return if (tokenValue != null && tokenHelper.validateToken(tokenValue)) tokenValue else null
     }
 
     fun getSubject(token: String): String = tokenHelper.getSubject(token)
+
 }

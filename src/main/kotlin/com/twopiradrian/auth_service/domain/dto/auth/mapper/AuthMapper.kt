@@ -4,7 +4,7 @@ import com.twopiradrian.auth_service.domain.dto.auth.mapper.implementation.Login
 import com.twopiradrian.auth_service.domain.dto.auth.mapper.implementation.RegisterMapper
 import com.twopiradrian.auth_service.domain.dto.auth.mapper.implementation.AuthMapper
 
-object AuthMapper {
+class AuthMapper {
 
     fun auth(): AuthMapper = AuthMapper
 
