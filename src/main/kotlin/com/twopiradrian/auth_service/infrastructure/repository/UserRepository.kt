@@ -16,7 +16,7 @@ class UserRepository(
     override fun findById(id: String): User? {
         val userModel: UserModel = this.userRepository.findById(id).orElse(null)
 
-        if (userModel.getStatus() == Status.INACTIVE || userModel.getStatus() == Status.DELETED) {
+        if (userModel.getStatus() == Status.DELETED) {
             return null
         }
 
@@ -26,7 +26,7 @@ class UserRepository(
     override fun findByEmail(email: String): User? {
         val userModel: UserModel = this.userRepository.findByEmail(email).orElse(null)
 
-        if (userModel.getStatus() == Status.INACTIVE || userModel.getStatus() == Status.DELETED) {
+        if (userModel.getStatus() == Status.DELETED) {
             return null
         }
 
@@ -36,7 +36,7 @@ class UserRepository(
     override fun findByUsername(username: String): User? {
         val userModel: UserModel = this.userRepository.findByUsername(username).orElse(null)
 
-        if (userModel.getStatus() == Status.INACTIVE || userModel.getStatus() == Status.DELETED) {
+        if (userModel.getStatus() == Status.DELETED) {
             return null
         }
 

@@ -35,6 +35,10 @@ class AuthService(
         val user: User = this.userRepository.findById(subject)
             ?: throw ErrorHandler(ErrorType.USER_NOT_FOUND)
 
+        if (user.getStatus() == Status.PENDING) {
+            throw ErrorHandler(ErrorType.USER_NOT_ACTIVATED)
+        }
+
         return AuthMapper().authenticate().toResponse(user)
     }
 
@@ -43,7 +47,7 @@ class AuthService(
             ?: throw ErrorHandler(ErrorType.USER_NOT_FOUND)
 
         if (!this.authHelper.validatePassword(user, dto.password)) {
-            throw ErrorHandler(ErrorType.INVALID_PASSWORD)
+            throw ErrorHandler(ErrorType.PASSWORDS_DO_NOT_MATCH)
         }
 
         user.updateLastLogin()

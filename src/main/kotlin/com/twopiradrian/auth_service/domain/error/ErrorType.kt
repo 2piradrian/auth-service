@@ -11,6 +11,7 @@ enum class ErrorType(
 
     UNAUTHORIZED("Unauthorized", 401),
     PASSWORDS_DO_NOT_MATCH("Passwords do not match", 400),
+    USER_NOT_ACTIVATED("User not activated", 400),
 
     INVALID_PASSWORD("Invalid password", 400),
     INVALID_USERNAME("Invalid username", 400),
