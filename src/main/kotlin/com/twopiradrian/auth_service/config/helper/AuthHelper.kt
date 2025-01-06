@@ -4,43 +4,25 @@ import com.twopiradrian.auth_service.domain.entity.Token
 import com.twopiradrian.auth_service.domain.entity.User
 import org.springframework.security.crypto.password.PasswordEncoder
 
+
 class AuthHelper(
     private val passwordEncoder: PasswordEncoder,
     private val tokenHelper: TokenHelper
 ) {
-    // TODO: Finish the implementation
-    fun hashPassword(password: String): String {
-        return this.passwordEncoder.encode(password)
-    }
 
-    fun validatePassword(user: User, password: String): Boolean {
-        return this.passwordEncoder.matches(password, user.password)
-    }
+    fun hashPassword(password: String): String = passwordEncoder.encode(password)
 
-    fun createToken(user: User?): Token {
-        return Token(this.tokenHelper.createToken(user))
-    }
+    fun validatePassword(user: User, password: String): Boolean =
+        passwordEncoder.matches(password, user.password)
+
+    fun createToken(user: User): Token = Token(tokenHelper.createToken(user))
 
     fun validateToken(token: String?): String? {
-        if (token.isNullOrEmpty()) {
-            return null
-        }
+        val tokenValue = token?.takeIf { it.startsWith("Bearer ") }
+            ?.removePrefix("Bearer ")
 
-        if (!token.startsWith("Bearer ")) {
-            return null
-        }
-
-        val tokenValue = token.replace("Bearer ", "")
-        if (this.tokenHelper.validateToken(tokenValue)) {
-            return tokenValue
-        }
-
-        return null
+        return if (tokenValue != null && tokenHelper.validateToken(tokenValue)) tokenValue else null
     }
 
-    fun getSubject(token: String?): String {
-        return this.tokenHelper.getSubject(token)
-    }
-
-
+    fun getSubject(token: String): String = tokenHelper.getSubject(token)
 }
