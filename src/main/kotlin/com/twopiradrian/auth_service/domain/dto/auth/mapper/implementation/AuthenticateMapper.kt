@@ -15,7 +15,7 @@ class AuthenticateMapper {
 
         fun toResponse(user: User): AuthenticateUserRes {
             return AuthenticateUserRes(
-                user.getId(),
+                user.getId()!!,
                 user.getEmail(),
                 user.getRoles(),
             )

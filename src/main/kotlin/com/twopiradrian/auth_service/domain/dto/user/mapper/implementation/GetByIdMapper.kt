@@ -15,7 +15,7 @@ class GetByIdMapper {
 
         fun toResponse(user: User): GetUserByIdRes {
             return GetUserByIdRes(
-                user.getId(),
+                user.getId()!!,
                 user.getUsername(),
                 user.getEmail(),
                 user.getRoles(),

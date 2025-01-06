@@ -3,7 +3,7 @@ package com.twopiradrian.auth_service.domain.entity
 import java.time.LocalDateTime
 
 data class User (
-    private var id: String,
+    private var id: String?,
     private var username: String,
     private var email: String,
     private var password: String,

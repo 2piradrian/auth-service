@@ -66,7 +66,7 @@ class AuthService(
         if (usernameCheck != null) throw ErrorHandler(ErrorType.USERNAME_ALREADY_EXISTS)
 
         val user = User(
-            id = null.toString(),
+            id = null,
             username = dto.username,
             email = dto.email,
             password = this.authHelper.hashPassword(dto.password),

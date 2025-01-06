@@ -17,7 +17,7 @@ class RegisterMapper {
 
         fun toResponse(user: User): RegisterUserRes {
             return RegisterUserRes(
-                user.getId(),
+                user.getId()!!,
                 user.getUsername(),
                 user.getEmail(),
                 user.getRoles(),

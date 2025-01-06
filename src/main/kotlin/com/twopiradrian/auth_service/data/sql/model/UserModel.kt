@@ -11,7 +11,7 @@ class UserModel () {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private var id: String = ""
+    private var id: String? = ""
 
     private var username: String = ""
 
@@ -30,7 +30,7 @@ class UserModel () {
     private var lastLogin: LocalDateTime? = null
 
     constructor(
-        id: String,
+        id: String?,
         username: String,
         email: String,
         password: String,
@@ -49,7 +49,7 @@ class UserModel () {
         this.lastLogin = lastLogin
     }
 
-    fun getId(): String = id
+    fun getId(): String? = id
     fun getUsername(): String = username
     fun getEmail(): String = email
     fun getPassword(): String = password
