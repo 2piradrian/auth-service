@@ -55,7 +55,7 @@ class AuthService(
 
         val token: Token = this.authHelper.createToken(user)
 
-        return AuthMapper().login().toResponse(token)
+        return AuthMapper().login().toResponse(user, token)
     }
 
     override fun register(dto: RegisterUserReq): RegisterUserRes {

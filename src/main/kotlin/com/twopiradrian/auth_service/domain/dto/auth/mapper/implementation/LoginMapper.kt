@@ -3,6 +3,7 @@ package com.twopiradrian.auth_service.domain.dto.auth.mapper.implementation
 import com.twopiradrian.auth_service.domain.dto.auth.request.LoginUserReq
 import com.twopiradrian.auth_service.domain.dto.auth.response.LoginUserRes
 import com.twopiradrian.auth_service.domain.entity.Token
+import com.twopiradrian.auth_service.domain.entity.User
 
 class LoginMapper {
 
@@ -14,9 +15,11 @@ class LoginMapper {
             )
         }
 
-        fun toResponse(token: Token?): LoginUserRes {
+        fun toResponse(user: User, token: Token): LoginUserRes {
             return LoginUserRes(
-                token
+                token,
+                user.getStatus(),
+                user.getEmail()
             )
         }
     }
