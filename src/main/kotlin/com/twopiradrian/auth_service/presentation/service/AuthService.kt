@@ -61,7 +61,7 @@ class AuthService(
         val usernameCheck: User? = this.userRepository.findByUsername(dto.username)
         if (usernameCheck != null) throw ErrorHandler(ErrorType.USERNAME_ALREADY_EXISTS)
 
-        val user: User = User(
+        val user = User(
             id = null.toString(),
             username = dto.username,
             email = dto.email,
