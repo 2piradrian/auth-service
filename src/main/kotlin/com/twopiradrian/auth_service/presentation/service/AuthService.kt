@@ -39,7 +39,7 @@ class AuthService(
             throw ErrorHandler(ErrorType.USER_NOT_ACTIVATED)
         }
 
-        return AuthMapper().authenticate().toResponse(user)
+        return AuthMapper.authenticate().toResponse(user)
     }
 
     override fun login(dto: LoginUserReq): LoginUserRes {
@@ -55,7 +55,7 @@ class AuthService(
 
         val token: Token = this.authHelper.createToken(user)
 
-        return AuthMapper().login().toResponse(user, token)
+        return AuthMapper.login().toResponse(user, token)
     }
 
     override fun register(dto: RegisterUserReq): RegisterUserRes {
@@ -78,7 +78,7 @@ class AuthService(
 
         val saved: User = this.userRepository.save(user)
 
-        return AuthMapper().register().toResponse(saved)
+        return AuthMapper.register().toResponse(saved)
     }
 
 }

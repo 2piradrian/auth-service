@@ -4,7 +4,7 @@ import com.twopiradrian.auth_service.domain.error.ErrorHandler
 import com.twopiradrian.auth_service.domain.error.ErrorType
 
 class GetUserByIdReq private constructor(
-    private val userId: String
+    val userId: String
 ) {
     companion object {
         fun create(

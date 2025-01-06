@@ -6,10 +6,14 @@ import com.twopiradrian.auth_service.domain.dto.auth.mapper.implementation.Authe
 
 class AuthMapper {
 
-    fun authenticate(): AuthenticateMapper.Companion = AuthenticateMapper
+    companion object {
 
-    fun login(): LoginMapper.Companion = LoginMapper
+        fun authenticate(): AuthenticateMapper.Companion = AuthenticateMapper
 
-    fun register(): RegisterMapper.Companion = RegisterMapper
+        fun login(): LoginMapper.Companion = LoginMapper
+
+        fun register(): RegisterMapper.Companion = RegisterMapper
+
+    }
 
 }

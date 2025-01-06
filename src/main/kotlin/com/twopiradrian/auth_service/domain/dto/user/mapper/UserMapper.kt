@@ -4,8 +4,12 @@ import com.twopiradrian.auth_service.domain.dto.user.mapper.implementation.*
 
 class UserMapper {
 
-    fun getById(): GetByIdMapper.Companion = GetByIdMapper
+    companion object {
 
-    fun delete(): DeleteMapper.Companion = DeleteMapper
+        fun getById(): GetByIdMapper.Companion = GetByIdMapper
+
+        fun delete(): DeleteMapper.Companion = DeleteMapper
+
+    }
 
 }

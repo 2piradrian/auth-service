@@ -4,7 +4,7 @@ import com.twopiradrian.auth_service.domain.error.ErrorHandler
 import com.twopiradrian.auth_service.domain.error.ErrorType
 
 class DeleteUserReq private constructor(
-    private val token: String
+    val token: String
 ) {
     companion object {
         fun create(
