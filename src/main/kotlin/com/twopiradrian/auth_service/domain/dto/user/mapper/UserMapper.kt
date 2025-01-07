@@ -8,6 +8,8 @@ class UserMapper {
 
         fun getById(): GetByIdMapper.Companion = GetByIdMapper
 
+        fun getByUsername(): GetByUsernameMapper.Companion = GetByUsernameMapper
+
         fun delete(): DeleteMapper.Companion = DeleteMapper
 
     }

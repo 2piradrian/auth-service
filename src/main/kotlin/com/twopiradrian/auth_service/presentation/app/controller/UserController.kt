@@ -26,6 +26,14 @@ class UserController(
         return ResponseEntity.ok(userService.getById(dto))
     }
 
+    @GetMapping("/get-by-username/{username}")
+    fun getByUsername(
+        @PathVariable(value = "username") username: String?
+    ): ResponseEntity<Any> {
+        val dto = UserMapper.getByUsername().toRequest(username)
+        return ResponseEntity.ok(userService.getByUsername(dto))
+    }
+
     @DeleteMapping("/delete")
     fun delete(
         @RequestHeader(value = "Authorization") token: String?
