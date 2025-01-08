@@ -3,11 +3,14 @@ package com.twopiradrian.auth_service.presentation.app.controller
 import com.twopiradrian.auth_service.domain.dto.user.mapper.UserMapper
 import com.twopiradrian.auth_service.domain.dto.user.request.DeleteUserReq
 import com.twopiradrian.auth_service.domain.dto.user.request.GetUserByIdReq
+import com.twopiradrian.auth_service.domain.dto.user.request.SetUserRolesReq
 import com.twopiradrian.auth_service.presentation.app.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -32,6 +35,14 @@ class UserController(
     ): ResponseEntity<Any> {
         val dto = UserMapper.getByUsername().toRequest(username)
         return ResponseEntity.ok(userService.getByUsername(dto))
+    }
+
+    @PatchMapping("/set-roles")
+    fun setRoles(
+        @RequestHeader(value = "Authorization") token: String?,
+        @RequestBody payload: Map<String?, Any?>
+    ): ResponseEntity<Any> {
+        val dto: SetUserRolesReq = UserMapper.setRoles().toRequest(token, payload)
     }
 
     @DeleteMapping("/delete")

@@ -10,6 +10,8 @@ class UserMapper {
 
         fun getByUsername(): GetByUsernameMapper.Companion = GetByUsernameMapper
 
+        fun setRoles(): SetRolesMapper.Companion = SetRolesMapper
+
         fun delete(): DeleteMapper.Companion = DeleteMapper
 
     }
