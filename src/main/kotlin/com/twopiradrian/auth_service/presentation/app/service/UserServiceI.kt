@@ -17,6 +17,4 @@ interface UserServiceI {
 
     fun delete(dto: DeleteUserReq)
 
-    //changePassword
-
 }
