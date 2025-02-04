@@ -1,0 +1,43 @@
+spring:
+
+  application:
+    name: auth-service
+    api:
+      url: ${}
+
+  profiles:
+    default: default
+
+  datasource:
+    username: ${}
+    password: ${}
+    url: ${}
+    hikari:
+      maximum-pool-size: ${}
+      connection-timeout: ${}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${}
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${}
+    password: ${}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+application:
+  jwt:
+    secret:
+      login: "I'll see you on the dark side of the moon"
+      validation: "I can't think of anything to say except, laughing is nice"
+    expiration: 86400000
+
+server:
+  port: 4444
