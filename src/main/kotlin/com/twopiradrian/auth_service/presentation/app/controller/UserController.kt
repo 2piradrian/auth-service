@@ -43,6 +43,7 @@ class UserController(
         @RequestBody payload: Map<String?, Any?>
     ): ResponseEntity<Any> {
         val dto: SetUserRolesReq = UserMapper.setRoles().toRequest(token, payload)
+        return ResponseEntity.ok(userService.setRoles(dto))
     }
 
     @DeleteMapping("/delete")
