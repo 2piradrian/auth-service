@@ -13,7 +13,7 @@ class AuthHelper(
 ) {
 
     fun hashPassword(password: String): String =
-        passwordEncoder.encode(password)
+        passwordEncoder.encode(password)!!
 
     fun validatePassword(user: User, password: String): Boolean =
         passwordEncoder.matches(password, user.getPassword())

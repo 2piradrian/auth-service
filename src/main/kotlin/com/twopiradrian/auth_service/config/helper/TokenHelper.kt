@@ -19,16 +19,16 @@ class TokenHelper(
         getExpirationDate(token, tokenType).after(Date())
 
     fun getSubject(token: String, tokenType: TokenType): String =
-        getClaims(token, tokenType, Claims::getSubject)
+        getClaims(token, tokenType) { it.subject }
 
     fun createToken(user: User, tokenType: TokenType): String {
         val now = Date()
         val secretKey = getSecretKey(tokenType)
 
         return Jwts.builder()
-            .setSubject(user.getId())
-            .setIssuedAt(now)
-            .setExpiration(Date(now.time + environmentVars.getExpiration()))
+            .subject(user.getId())
+            .issuedAt(now)
+            .expiration(Date(now.time + environmentVars.getExpiration()))
             .signWith(secretKey)
             .compact()
     }
@@ -40,15 +40,15 @@ class TokenHelper(
         }
 
     private fun getExpirationDate(token: String, tokenType: TokenType): Date =
-        getClaims(token, tokenType, Claims::getExpiration)
+        getClaims(token, tokenType) { it.expiration }
 
     private fun <T> getClaims(token: String, tokenType: TokenType, resolver: (Claims) -> T): T =
         resolver(parseClaims(token, tokenType))
 
-    private fun parseClaims(token: String, tokenType: TokenType): Claims = Jwts.parserBuilder()
-        .setSigningKey(getSecretKey(tokenType))
+    private fun parseClaims(token: String, tokenType: TokenType): Claims = Jwts.parser()
+        .verifyWith(getSecretKey(tokenType))
         .build()
-        .parseClaimsJws(token)
-        .body
+        .parseSignedClaims(token)
+        .payload
 
 }
